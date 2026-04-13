@@ -13,11 +13,12 @@ const invoicesSlice = createSlice({
   name: 'invoices',
   initialState,
   reducers: {
-    addInvoice: (state, action: PayloadAction<Omit<Invoice, 'id' | 'createdAt'>>) => {
+    addInvoice: (state, action: PayloadAction<Omit<Invoice, 'id' | 'createdAt' | 'status'>>) => {
       const newInvoice: Invoice = {
         ...action.payload,
         id: generateId(),
         createdAt: new Date().toISOString().split('T')[0],
+        status: 'pending',
       };
       state.invoices.push(newInvoice);
     },
@@ -30,8 +31,20 @@ const invoicesSlice = createSlice({
     deleteInvoice: (state, action: PayloadAction<string>) => {
       state.invoices = state.invoices.filter(i => i.id !== action.payload);
     },
+    confirmOrder: (state, action: PayloadAction<string>) => {
+      const invoice = state.invoices.find(i => i.id === action.payload);
+      if (invoice) {
+        invoice.status = 'confirmed';
+      }
+    },
+    discardOrder: (state, action: PayloadAction<string>) => {
+      const invoice = state.invoices.find(i => i.id === action.payload);
+      if (invoice) {
+        invoice.status = 'discarded';
+      }
+    },
   },
 });
 
-export const { addInvoice, updateInvoice, deleteInvoice } = invoicesSlice.actions;
+export const { addInvoice, updateInvoice, deleteInvoice, confirmOrder, discardOrder } = invoicesSlice.actions;
 export default invoicesSlice.reducer;

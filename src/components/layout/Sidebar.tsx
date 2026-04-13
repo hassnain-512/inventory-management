@@ -7,6 +7,7 @@ import {
   Users,
   Receipt,
   ShoppingCart,
+  BarChart2,
   Settings,
   X,
 } from 'lucide-react';
@@ -26,6 +27,7 @@ const navItems = [
   { path: '/salesmen', label: 'Salesmen', icon: Users },
   { path: '/billing', label: 'Sales & Billing', icon: Receipt },
   { path: '/orders', label: 'Orders', icon: ShoppingCart },
+  { path: '/reports', label: 'Reports', icon: BarChart2 },
   { path: '/settings', label: 'Settings', icon: Settings },
 ];
 

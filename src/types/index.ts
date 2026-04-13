@@ -80,6 +80,7 @@ export interface Invoice {
   discount: number;
   grandTotal: number;
   createdAt: string;
+  status: 'pending' | 'confirmed' | 'discarded';
 }
 
 // Settings
