@@ -318,7 +318,7 @@ export function ReportsPage() {
             </Card>
             <Card>
               <CardContent className="p-4">
-                <p className="text-sm text-muted-foreground">Low / Negative Stock</p>
+                <p className="text-sm text-muted-foreground">Out of Stock / Negative</p>
                 <p className="text-2xl font-bold text-red-600">
                   {products.filter(p => p.stock <= 0).length}
                 </p>
