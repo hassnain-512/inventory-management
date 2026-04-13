@@ -42,8 +42,16 @@ const productsSlice = createSlice({
         product.stock = product.stock - action.payload.quantity;
       }
     },
+    deductStockBatch: (state, action: PayloadAction<{ productId: string; quantity: number }[]>) => {
+      action.payload.forEach(({ productId, quantity }) => {
+        const product = state.products.find(p => p.id === productId);
+        if (product) {
+          product.stock = product.stock - quantity;
+        }
+      });
+    },
   },
 });
 
-export const { addProduct, updateProduct, deleteProduct, toggleProductStatus, updateStock } = productsSlice.actions;
+export const { addProduct, updateProduct, deleteProduct, toggleProductStatus, updateStock, deductStockBatch } = productsSlice.actions;
 export default productsSlice.reducer;

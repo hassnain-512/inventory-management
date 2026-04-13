@@ -18,7 +18,7 @@ import {
 } from '@/components/common/Table';
 import { useAppSelector, useAppDispatch } from '@/store/hooks';
 import { confirmOrder, discardOrder, deleteInvoice } from '@/features/billing/invoicesSlice';
-import { updateStock } from '@/features/products/productsSlice';
+import { deductStockBatch } from '@/features/products/productsSlice';
 import { Invoice } from '@/types';
 import { formatDate, formatCurrency } from '@/utils/helpers';
 import { InvoicePrint } from '@/features/billing/InvoicePrint';
@@ -75,9 +75,7 @@ export function OrdersPage() {
 
   const handleConfirm = (invoice: Invoice) => {
     dispatch(confirmOrder(invoice.id));
-    invoice.items.forEach(item => {
-      dispatch(updateStock({ productId: item.productId, quantity: item.quantity }));
-    });
+    dispatch(deductStockBatch(invoice.items.map(item => ({ productId: item.productId, quantity: item.quantity }))));
     toast.success(`Order ${invoice.invoiceNumber} confirmed`);
   };
 
