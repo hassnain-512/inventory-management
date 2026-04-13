@@ -39,7 +39,7 @@ const productsSlice = createSlice({
     updateStock: (state, action: PayloadAction<{ productId: string; quantity: number }>) => {
       const product = state.products.find(p => p.id === action.payload.productId);
       if (product) {
-        product.stock = Math.max(0, product.stock - action.payload.quantity);
+        product.stock = product.stock - action.payload.quantity;
       }
     },
   },

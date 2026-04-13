@@ -248,6 +248,7 @@ export const dummyInvoices: Invoice[] = [
     discount: 0,
     grandTotal: 26750,
     createdAt: '2024-02-15',
+    status: 'pending',
   },
   {
     id: 'inv2',
@@ -277,5 +278,6 @@ export const dummyInvoices: Invoice[] = [
     discount: 10,
     grandTotal: 19800,
     createdAt: '2024-02-20',
+    status: 'pending',
   },
 ];

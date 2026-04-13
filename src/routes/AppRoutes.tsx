@@ -7,6 +7,7 @@ import { ProductsPage } from '@/features/products/ProductsPage';
 import { SalesmenPage } from '@/features/salesmen/SalesmenPage';
 import { BillingPage } from '@/features/billing/BillingPage';
 import { OrdersPage } from '@/features/orders/OrdersPage';
+import { ReportsPage } from '@/features/reports/ReportsPage';
 import { SettingsPage } from '@/features/settings/SettingsPage';
 
 export function AppRoutes() {
@@ -20,6 +21,7 @@ export function AppRoutes() {
         <Route path="salesmen" element={<SalesmenPage />} />
         <Route path="billing" element={<BillingPage />} />
         <Route path="orders" element={<OrdersPage />} />
+        <Route path="reports" element={<ReportsPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
     </Routes>

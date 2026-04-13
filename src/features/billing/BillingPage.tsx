@@ -140,7 +140,7 @@ export function BillingPage() {
       total: lineTotal(l),
     }));
 
-    const invoice: Omit<Invoice, 'id' | 'createdAt'> = {
+    const invoice: Omit<Invoice, 'id' | 'createdAt' | 'status'> = {
       invoiceNumber,
       salesmanId,
       salesmanName: salesman?.name || '',
@@ -154,7 +154,7 @@ export function BillingPage() {
     };
 
     dispatch(addInvoice(invoice));
-    const newInvoice = { ...invoice, id: generateId(), createdAt: new Date().toISOString().split('T')[0] };
+    const newInvoice: Invoice = { ...invoice, id: generateId(), createdAt: new Date().toISOString().split('T')[0], status: 'pending' };
     setSavedInvoice(newInvoice);
     toast.success(MESSAGES.INVOICE_SAVED);
 

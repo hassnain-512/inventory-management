@@ -11,6 +11,7 @@ const routeTitles: Record<string, string> = {
   '/salesmen': 'Salesmen Management',
   '/billing': 'Sales & Billing',
   '/orders': 'Orders',
+  '/reports': 'Reports',
   '/settings': 'Settings',
 };
 
