@@ -147,7 +147,7 @@ export function DashboardPage() {
                     <div>
                       <p className="text-sm font-medium">{invoice.invoiceNumber}</p>
                       <p className="text-xs text-muted-foreground">
-                        {invoice.customerName} · {invoice.salesmanName}
+                        {invoice.salesmanName}
                       </p>
                     </div>
                     <div className="text-right">
