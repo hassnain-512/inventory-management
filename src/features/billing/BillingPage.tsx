@@ -59,10 +59,8 @@ export function BillingPage() {
   const settings = useAppSelector(state => state.settings);
 
   const [salesmanId, setSalesmanId] = useState('');
-  const [customerName, setCustomerName] = useState('');
   const [billingDate, setBillingDate] = useState(new Date().toISOString().split('T')[0]);
   const [notes, setNotes] = useState('');
-  const [overallDiscount, setOverallDiscount] = useState(0);
   const [lines, setLines] = useState<LineItem[]>([emptyLine()]);
   const [savedInvoice, setSavedInvoice] = useState<Invoice | null>(null);
 
@@ -109,17 +107,14 @@ export function BillingPage() {
 
   const lineTotal = (line: LineItem) => {
     const gross = line.quantity * line.unitPrice;
-    const discAmount = (gross * line.discount) / 100;
-    return gross - discAmount;
+    return gross - line.discount;
   };
 
   const subtotal = lines.reduce((sum, l) => sum + lineTotal(l), 0);
-  const discountAmount = (subtotal * overallDiscount) / 100;
-  const grandTotal = subtotal - discountAmount;
+  const grandTotal = subtotal;
 
   const handleSave = () => {
     if (!salesmanId) { toast.error('Please select a salesman'); return; }
-    if (!customerName) { toast.error('Please enter customer name'); return; }
     if (lines.some(l => !l.productId)) { toast.error('All product rows must have a product selected'); return; }
 
     const salesman = salesmen.find(s => s.id === salesmanId);
@@ -144,12 +139,10 @@ export function BillingPage() {
       invoiceNumber,
       salesmanId,
       salesmanName: salesman?.name || '',
-      customerName,
       billingDate,
       notes,
       items,
       subtotal,
-      discount: overallDiscount,
       grandTotal,
     };
 
@@ -160,9 +153,7 @@ export function BillingPage() {
 
     // Reset form
     setSalesmanId('');
-    setCustomerName('');
     setNotes('');
-    setOverallDiscount(0);
     setLines([emptyLine()]);
     setBillingDate(new Date().toISOString().split('T')[0]);
   };
@@ -175,7 +166,7 @@ export function BillingPage() {
           <CardTitle>Invoice Details</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label>Salesman *</Label>
               <Select value={salesmanId} onValueChange={setSalesmanId}>
@@ -191,15 +182,6 @@ export function BillingPage() {
             </div>
 
             <div className="space-y-2">
-              <Label>Customer Name *</Label>
-              <Input
-                placeholder="Customer/shop name"
-                value={customerName}
-                onChange={e => setCustomerName(e.target.value)}
-              />
-            </div>
-
-            <div className="space-y-2">
               <Label>Billing Date</Label>
               <Input
                 type="date"
@@ -208,19 +190,7 @@ export function BillingPage() {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label>Overall Discount %</Label>
-              <Input
-                type="number"
-                min="0"
-                max="100"
-                step="0.1"
-                value={overallDiscount}
-                onChange={e => setOverallDiscount(Number(e.target.value))}
-              />
-            </div>
-
-            <div className="sm:col-span-2 lg:col-span-4 space-y-2">
+            <div className="sm:col-span-2 lg:col-span-3 space-y-2">
               <Label>Notes</Label>
               <Textarea
                 placeholder="Additional notes..."
@@ -259,7 +229,7 @@ export function BillingPage() {
                   <TableHead>Qty</TableHead>
                   <TableHead>Expiry</TableHead>
                   <TableHead>Unit Price</TableHead>
-                  <TableHead>Disc %</TableHead>
+                  <TableHead>Disc (Rs.)</TableHead>
                   <TableHead>Total</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
@@ -370,12 +340,12 @@ export function BillingPage() {
                         />
                       </TableCell>
 
-                      <TableCell className="min-w-[70px]">
+                      <TableCell className="min-w-[90px]">
                         <Input
                           className="h-8 text-xs"
                           type="number"
                           min="0"
-                          max="100"
+                          step="0.01"
                           value={line.discount}
                           onChange={e => updateLine(line.id, 'discount', Number(e.target.value))}
                         />
@@ -405,15 +375,6 @@ export function BillingPage() {
           {/* Totals */}
           <div className="mt-4 flex justify-end">
             <div className="w-full max-w-xs space-y-2">
-              <Separator />
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Subtotal</span>
-                <span>{formatCurrency(subtotal, settings.currencySymbol)}</span>
-              </div>
-              <div className="flex justify-between text-sm">
-                <span className="text-muted-foreground">Discount ({overallDiscount}%)</span>
-                <span>-{formatCurrency(discountAmount, settings.currencySymbol)}</span>
-              </div>
               <Separator />
               <div className="flex justify-between font-bold">
                 <span>Grand Total</span>

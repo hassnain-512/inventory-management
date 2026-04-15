@@ -202,7 +202,6 @@ export function OrdersPage() {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Invoice #</TableHead>
-                        <TableHead>Customer</TableHead>
                         <TableHead>Items</TableHead>
                         <TableHead>Grand Total</TableHead>
                         <TableHead>Status</TableHead>
@@ -213,7 +212,6 @@ export function OrdersPage() {
                       {group.invoices.map(invoice => (
                         <TableRow key={invoice.id}>
                           <TableCell className="font-medium">{invoice.invoiceNumber}</TableCell>
-                          <TableCell>{invoice.customerName}</TableCell>
                           <TableCell>{invoice.items.length} items</TableCell>
                           <TableCell className="font-semibold">
                             {formatCurrency(invoice.grandTotal, settings.currencySymbol)}

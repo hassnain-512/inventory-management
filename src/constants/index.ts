@@ -32,6 +32,8 @@ export const MESSAGES = {
   SALESMAN_ADDED: 'Salesman added successfully',
   SALESMAN_UPDATED: 'Salesman updated successfully',
   SALESMAN_DELETED: 'Salesman deleted successfully',
+  ATTENDANCE_SAVED: 'Attendance saved successfully',
+  ATTENDANCE_UPDATED: 'Attendance record updated successfully',
   INVOICE_SAVED: 'Invoice saved successfully',
   SETTINGS_SAVED: 'Settings saved successfully',
   DELETE_CONFIRM: 'Are you sure you want to delete this item?',
