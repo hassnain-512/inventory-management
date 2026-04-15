@@ -157,7 +157,6 @@ export function ReportsPage() {
                     <TableHeader>
                       <TableRow>
                         <TableHead>Invoice #</TableHead>
-                        <TableHead>Customer</TableHead>
                         <TableHead>Salesman</TableHead>
                         <TableHead>Items</TableHead>
                         <TableHead className="text-right">Grand Total</TableHead>
@@ -167,7 +166,6 @@ export function ReportsPage() {
                       {dailyOrders.map(inv => (
                         <TableRow key={inv.id}>
                           <TableCell className="font-medium">{inv.invoiceNumber}</TableCell>
-                          <TableCell>{inv.customerName}</TableCell>
                           <TableCell>{inv.salesmanName}</TableCell>
                           <TableCell>{inv.items.reduce((s, i) => s + i.quantity, 0)}</TableCell>
                           <TableCell className="text-right font-semibold">
@@ -176,7 +174,7 @@ export function ReportsPage() {
                         </TableRow>
                       ))}
                       <TableRow className="font-bold bg-muted/30">
-                        <TableCell colSpan={3}>Total</TableCell>
+                        <TableCell colSpan={2}>Total</TableCell>
                         <TableCell>{dailyItemsSold}</TableCell>
                         <TableCell className="text-right">
                           {formatCurrency(dailyRevenue, settings.currencySymbol)}
@@ -265,7 +263,6 @@ export function ReportsPage() {
                       <TableRow>
                         <TableHead>Invoice #</TableHead>
                         <TableHead>Date</TableHead>
-                        <TableHead>Customer</TableHead>
                         <TableHead>Salesman</TableHead>
                         <TableHead>Items</TableHead>
                         <TableHead className="text-right">Grand Total</TableHead>
@@ -276,7 +273,6 @@ export function ReportsPage() {
                         <TableRow key={inv.id}>
                           <TableCell className="font-medium">{inv.invoiceNumber}</TableCell>
                           <TableCell>{formatDate(inv.billingDate)}</TableCell>
-                          <TableCell>{inv.customerName}</TableCell>
                           <TableCell>{inv.salesmanName}</TableCell>
                           <TableCell>{inv.items.reduce((s, i) => s + i.quantity, 0)}</TableCell>
                           <TableCell className="text-right font-semibold">
@@ -285,7 +281,7 @@ export function ReportsPage() {
                         </TableRow>
                       ))}
                       <TableRow className="font-bold bg-muted/30">
-                        <TableCell colSpan={4}>Total</TableCell>
+                        <TableCell colSpan={3}>Total</TableCell>
                         <TableCell>{monthlyItemsSold}</TableCell>
                         <TableCell className="text-right">
                           {formatCurrency(monthlyRevenue, settings.currencySymbol)}

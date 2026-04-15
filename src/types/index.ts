@@ -72,15 +72,28 @@ export interface Invoice {
   invoiceNumber: string;
   salesmanId: string;
   salesmanName: string;
-  customerName: string;
   billingDate: string;
   notes: string;
   items: InvoiceItem[];
   subtotal: number;
-  discount: number;
   grandTotal: number;
   createdAt: string;
   status: 'pending' | 'confirmed' | 'discarded';
+}
+
+// Attendance
+export type AttendanceStatus = 'PRESENT' | 'ABSENT' | 'LATE' | 'LEAVE' | 'HALF_DAY';
+
+export interface AttendanceRecord {
+  id: string;
+  salesmanId: string;
+  date: string;
+  status: AttendanceStatus;
+  checkIn: string;
+  checkOut: string;
+  remarks: string;
+  isBackdated: boolean;
+  createdAt: string;
 }
 
 // Settings
@@ -122,6 +135,12 @@ export interface SalesmenState {
 
 export interface InvoicesState {
   invoices: Invoice[];
+  loading: boolean;
+  error: string | null;
+}
+
+export interface AttendanceState {
+  records: AttendanceRecord[];
   loading: boolean;
   error: string | null;
 }

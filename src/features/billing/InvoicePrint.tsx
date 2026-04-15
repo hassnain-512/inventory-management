@@ -31,8 +31,6 @@ export const InvoicePrint = React.forwardRef<HTMLDivElement, InvoicePrintProps>(
 
         {/* Bill To */}
         <div className="mb-6">
-          <h3 className="font-semibold text-gray-700 mb-1">Bill To:</h3>
-          <p className="font-medium">{invoice.customerName}</p>
           <p className="text-gray-600">Salesman: {invoice.salesmanName}</p>
           {invoice.notes && <p className="text-gray-600 mt-1">Note: {invoice.notes}</p>}
         </div>
@@ -48,7 +46,7 @@ export const InvoicePrint = React.forwardRef<HTMLDivElement, InvoicePrintProps>(
               <th className="border border-gray-300 p-2 text-left text-sm">Expiry</th>
               <th className="border border-gray-300 p-2 text-right text-sm">Qty</th>
               <th className="border border-gray-300 p-2 text-right text-sm">Unit Price</th>
-              <th className="border border-gray-300 p-2 text-right text-sm">Disc%</th>
+              <th className="border border-gray-300 p-2 text-right text-sm">Disc (Rs.)</th>
               <th className="border border-gray-300 p-2 text-right text-sm">Total</th>
             </tr>
           </thead>
@@ -64,7 +62,7 @@ export const InvoicePrint = React.forwardRef<HTMLDivElement, InvoicePrintProps>(
                 <td className="border border-gray-300 p-2 text-sm text-right">
                   {formatCurrency(item.unitPrice, settings.currencySymbol)}
                 </td>
-                <td className="border border-gray-300 p-2 text-sm text-right">{item.discount}%</td>
+                <td className="border border-gray-300 p-2 text-sm text-right">{formatCurrency(item.discount, settings.currencySymbol)}</td>
                 <td className="border border-gray-300 p-2 text-sm text-right font-medium">
                   {formatCurrency(item.total, settings.currencySymbol)}
                 </td>
@@ -80,12 +78,6 @@ export const InvoicePrint = React.forwardRef<HTMLDivElement, InvoicePrintProps>(
               <span className="text-gray-600">Subtotal:</span>
               <span>{formatCurrency(invoice.subtotal, settings.currencySymbol)}</span>
             </div>
-            {invoice.discount > 0 && (
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-600">Discount ({invoice.discount}%):</span>
-                <span>-{formatCurrency(invoice.subtotal * invoice.discount / 100, settings.currencySymbol)}</span>
-              </div>
-            )}
             <hr className="border-gray-300" />
             <div className="flex justify-between font-bold">
               <span>Grand Total:</span>

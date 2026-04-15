@@ -5,6 +5,7 @@ import productsReducer from '@/features/products/productsSlice';
 import salesmenReducer from '@/features/salesmen/salesmenSlice';
 import invoicesReducer from '@/features/billing/invoicesSlice';
 import settingsReducer from '@/features/settings/settingsSlice';
+import attendanceReducer from '@/features/attendance/attendanceSlice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     salesmen: salesmenReducer,
     invoices: invoicesReducer,
     settings: settingsReducer,
+    attendance: attendanceReducer,
   },
 });
 

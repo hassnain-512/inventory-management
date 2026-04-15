@@ -10,6 +10,8 @@ import {
   BarChart2,
   Settings,
   X,
+  CalendarCheck,
+  History,
 } from 'lucide-react';
 import { cn } from '@/utils/cn';
 import { useAppSelector } from '@/store/hooks';
@@ -25,6 +27,8 @@ const navItems = [
   { path: '/categories', label: 'Categories', icon: Tag },
   { path: '/products', label: 'Products', icon: Package },
   { path: '/salesmen', label: 'Salesmen', icon: Users },
+  { path: '/attendance', label: 'Attendance', icon: CalendarCheck },
+  { path: '/attendance/history', label: 'Attendance History', icon: History },
   { path: '/billing', label: 'Sales & Billing', icon: Receipt },
   { path: '/orders', label: 'Orders', icon: ShoppingCart },
   { path: '/reports', label: 'Reports', icon: BarChart2 },
@@ -80,7 +84,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <NavLink
                 key={item.path}
                 to={item.path}
-                end={item.path === '/'}
+                end={item.path === '/' || item.path === '/attendance'}
                 onClick={() => onClose()}
                 className={({ isActive }) =>
                   cn(
