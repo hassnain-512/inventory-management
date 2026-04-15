@@ -1,4 +1,4 @@
-import { Company, Category, Product, Salesman, Invoice } from '@/types';
+import { Company, Category, Product, Salesman, Invoice, AttendanceRecord } from '@/types';
 
 export const dummyCompanies: Company[] = [
   {
@@ -205,13 +205,70 @@ export const dummySalesmen: Salesman[] = [
   },
 ];
 
+export const dummyAttendance: AttendanceRecord[] = [
+  {
+    id: 'att1',
+    salesmanId: 's1',
+    date: '2024-02-15',
+    status: 'PRESENT',
+    checkIn: '09:00',
+    checkOut: '17:00',
+    remarks: '',
+    isBackdated: false,
+    createdAt: '2024-02-15',
+  },
+  {
+    id: 'att2',
+    salesmanId: 's2',
+    date: '2024-02-15',
+    status: 'LATE',
+    checkIn: '10:30',
+    checkOut: '17:00',
+    remarks: 'Traffic delay',
+    isBackdated: false,
+    createdAt: '2024-02-15',
+  },
+  {
+    id: 'att3',
+    salesmanId: 's3',
+    date: '2024-02-15',
+    status: 'PRESENT',
+    checkIn: '08:45',
+    checkOut: '17:15',
+    remarks: '',
+    isBackdated: false,
+    createdAt: '2024-02-15',
+  },
+  {
+    id: 'att4',
+    salesmanId: 's1',
+    date: '2024-02-16',
+    status: 'PRESENT',
+    checkIn: '09:00',
+    checkOut: '17:00',
+    remarks: '',
+    isBackdated: true,
+    createdAt: '2024-02-16',
+  },
+  {
+    id: 'att5',
+    salesmanId: 's2',
+    date: '2024-02-16',
+    status: 'ABSENT',
+    checkIn: '',
+    checkOut: '',
+    remarks: 'Sick leave',
+    isBackdated: true,
+    createdAt: '2024-02-16',
+  },
+];
+
 export const dummyInvoices: Invoice[] = [
   {
     id: 'inv1',
     invoiceNumber: 'INV-2024-001',
     salesmanId: 's1',
     salesmanName: 'Ahmed Ali',
-    customerName: 'City Pharmacy',
     billingDate: '2024-02-15',
     notes: 'Regular monthly order',
     items: [
@@ -226,7 +283,7 @@ export const dummyInvoices: Invoice[] = [
         quantity: 100,
         expiryDate: '2025-12-31',
         unitPrice: 150,
-        discount: 5,
+        discount: 750,
         total: 14250,
       },
       {
@@ -245,7 +302,6 @@ export const dummyInvoices: Invoice[] = [
       },
     ],
     subtotal: 26750,
-    discount: 0,
     grandTotal: 26750,
     createdAt: '2024-02-15',
     status: 'pending',
@@ -255,7 +311,6 @@ export const dummyInvoices: Invoice[] = [
     invoiceNumber: 'INV-2024-002',
     salesmanId: 's2',
     salesmanName: 'Bilal Hassan',
-    customerName: 'Metro Medical Store',
     billingDate: '2024-02-20',
     notes: 'Urgent order',
     items: [
@@ -270,12 +325,11 @@ export const dummyInvoices: Invoice[] = [
         quantity: 200,
         expiryDate: '2025-03-15',
         unitPrice: 110,
-        discount: 10,
+        discount: 2200,
         total: 19800,
       },
     ],
     subtotal: 22000,
-    discount: 10,
     grandTotal: 19800,
     createdAt: '2024-02-20',
     status: 'pending',
